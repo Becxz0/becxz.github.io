@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Denmark & Florida Time</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 80px; }
+        .time-box { font-size: 28px; margin: 18px 0; }
+        .label { font-weight: bold; }
+        .small { font-size: 14px; opacity: 0.75; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<h1>Current Time</h1>
+
+<div class="time-box" id="dk"></div>
+<div class="time-box" id="fl"></div>
+
+<div class="small">Updates every second</div>
+
+<script>
+    function formatTime(timeZone) {
+        return new Intl.DateTimeFormat("en-US", {
+            timeZone,
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+            hour: "numeric",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true   // 👈 This enables AM/PM
+        }).format(new Date());
+    }
+
+    function update() {
+        document.getElementById("dk").innerHTML =
+            "<strong>Denmark (Copenhagen):</strong> " +
+            formatTime("Europe/Copenhagen");
+
+        document.getElementById("fl").innerHTML =
+            "<strong>Florida (Eastern):</strong> " +
+            formatTime("America/New_York");
+    }
+
+    update();
+    setInterval(update, 1000);
+</script>
+</body>
+</html>
